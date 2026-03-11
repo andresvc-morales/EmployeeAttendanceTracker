@@ -1,2 +1,7 @@
 # Scraps local notes
-.scraps/
+.scraps
+# Composer vendor
+/vendor/
+
+# Firebase service account
+serviceAccount.json
