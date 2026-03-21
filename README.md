@@ -5,19 +5,19 @@ Employee attendance tracker using PHP, mySQL and firebase
 EmployeeAttendanceTracker
 ├─ database
 │  └─ script.sql
-├─ index,php
+├─ index.php
 ├─ README.md
 └─ resources
+   ├─ actions
+   │  ├─ attendance.php
+   │  ├─ authlogin.php
+   │  └─ authregister.php
    ├─ assets
    │  ├─ css
    │  └─ img
    ├─ config
    │  ├─ database.php
    │  └─ firebase.php
-   ├─ controllers
-   │  ├─ AuthController.php
-   │  └─ LoginController.php
-   ├─ models
    └─ views
       ├─ adminpanel.php
       ├─ dashboard.php
