@@ -1,40 +1,92 @@
+<?php
+session_start();
+require_once '../actions/authregister.php';
+require_once '../actions/dbuser.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $name = trim($_POST['name'] ?? '');
+
+    $_SESSION['old_email'] = $email;
+    $_SESSION['old_name'] = $name;
+
+    if (empty($name)) {
+        $_SESSION['message'] = 'Name is required.';
+        $_SESSION['success'] = false;
+
+    } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['message'] = 'A valid email is required.';
+        $_SESSION['success'] = false;
+
+    } else {
+        $result = firebaseSignUp($email, $password);
+
+        if ($result['success']) {
+            $firebase_uid = $result['data']['localId'];
+
+            $dbResult = insertUser($name, $email, $firebase_uid);
+
+            if ($dbResult['success']) {
+                unset($_SESSION['old_email'], $_SESSION['old_name']);
+
+                $_SESSION['message'] = "User registered successfully";
+                $_SESSION['success'] = true;
+
+                header("Location: /EmployeeAttendanceTracker/resources/views/login.php");
+                exit;
+            } else {
+                $_SESSION['message'] = $dbResult['message'];
+                $_SESSION['success'] = false;
+            }
+
+        } else {
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['success'] = false;
+        }
+    }
+    header('Location: /EmployeeAttendanceTracker/resources/views/register.php');
+    exit;
+}
+
+$message = $_SESSION['message'] ?? '';
+$success = $_SESSION['success'] ?? null;
+$old_email = $_SESSION['old_email'] ?? '';
+$old_name = $_SESSION['old_name'] ?? '';
+
+unset($_SESSION['message'], $_SESSION['success']);
+?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
     <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/EmployeeAttendanceTracker/resources/assets/css/loginandregister.css">
 </head>
 
-<Body>
-    <form>
-        <input type="text" id='name' placeholder='Nombre'>
-        <input type='email' id='email' placeholder='Correo'>
-        <input type='password' id='password' placeholder='Contraseña'>
-        <select id="role">
-            <option value="employee">Empleado</option>
-            <option value="admin">Administrador</option>
-        </select>
+<body>
+    <form id="register_form" method="POST" action="/EmployeeAttendanceTracker/resources/views/register.php">
+        <h2>Register</h2>
+        <label for="register_name">Name:</label>
+        <input type="text" id="register_name" name="name" value="<?= htmlspecialchars($old_name) ?>" placeholder="Name"
+            required>
 
-        <button type='button' onclick='register()'>Registrar</button>
+        <label for="register_email">Email:</label>
+        <input type="email" id="register_email" name="email" value="<?= htmlspecialchars($old_email) ?>"
+            placeholder="Email" required>
 
+        <label for="register_password">Password:</label>
+        <input type="password" id="register_password" name="password" placeholder="Password" required>
+
+        <button type="submit">Register</button>
+        <div id="auth_link">Already have an account? <a
+                href="/EmployeeAttendanceTracker/resources/views/login.php">Login here</a></div>
+        <p id="message"><?php echo htmlspecialchars($message); ?></p>
     </form>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyA13I09OPMLm-tMH9zMQgUFH2abe_rfLM8",
-            authDomain: "employeeattendancetracke-5c502.firebaseapp.com",
-            projectId: "employeeattendancetracke-5c502",
-            storageBucket: "employeeattendancetracke-5c502.firebasestorage.app",
-            messagingSenderId: "858304795754",
-            appId: "1:858304795754:web:9b90d392050a23c783e613"
-        };
-        firebase.initializeApp(firebaseConfig);
-        function register() {
-        
-        }
-    </script>
-</Body>
+
+</body>
 
 </html>

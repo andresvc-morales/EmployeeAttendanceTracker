@@ -1,0 +1,92 @@
+:root {
+  --loader-primary: rgba(13, 148, 136, 0.85);
+  --loader-secondary: rgba(211, 211, 211, 0.75);
+}
+
+.loader {
+  position: absolute;
+  top: calc(50% - 1.25em);
+  left: calc(50% - 1.25em);
+  width: 2.5em;
+  height: 2.5em;
+  transform: rotate(165deg);
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.25em;
+  transform: translate(-50%, -50%);
+}
+
+.loader:before {
+  animation: before8 2s infinite;
+}
+
+.loader:after {
+  animation: after6 2s infinite;
+}
+
+@keyframes before8 {
+  0% {
+    width: 0.5em;
+    box-shadow:
+      1em -0.5em var(--loader-primary),
+      -1em 0.5em var(--loader-secondary);
+  }
+
+  35% {
+    width: 2.5em;
+    box-shadow:
+      0 -0.5em var(--loader-primary),
+      0 0.5em var(--loader-secondary);
+  }
+
+  70% {
+    width: 0.5em;
+    box-shadow:
+      -1em -0.5em var(--loader-primary),
+      1em 0.5em var(--loader-secondary);
+  }
+
+  100% {
+    box-shadow:
+      1em -0.5em var(--loader-primary),
+      -1em 0.5em var(--loader-secondary);
+  }
+}
+
+@keyframes after6 {
+  0% {
+    height: 0.5em;
+    box-shadow:
+      0.5em 1em var(--loader-primary),
+      -0.5em -1em var(--loader-secondary);
+  }
+
+  35% {
+    height: 2.5em;
+    box-shadow:
+      0.5em 0 var(--loader-primary),
+      -0.5em 0 var(--loader-secondary);
+  }
+
+  70% {
+    height: 0.5em;
+    box-shadow:
+      0.5em -1em var(--loader-primary),
+      -0.5em 1em var(--loader-secondary);
+  }
+
+  100% {
+    box-shadow:
+      0.5em 1em var(--loader-primary),
+      -0.5em -1em var(--loader-secondary);
+  }
+}
