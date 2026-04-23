@@ -1,8 +1,8 @@
 <?php
 // Database connection settings
 $servername = "localhost";
-$username = "Van"; // Add your username
-$password = "vanilla_coke7"; // Add your password
+$username = ""; // Add your username
+$password = ""; // Add your password
 $dbname = "employee_attendance";
 
 // Open MySQL connection
