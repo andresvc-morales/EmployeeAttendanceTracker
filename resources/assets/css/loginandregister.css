@@ -1,5 +1,7 @@
+/* Google Font import */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
 
+/* Global design tokens */
 :root {
   --accent: #0d9488;
   --accent-dark: #0f766e;
@@ -17,6 +19,7 @@ body {
   background: var(--bg);
 }
 
+/* Centered card used for both login and register forms */
 #register_form {
   position: absolute;
   top: 50%;
@@ -61,6 +64,7 @@ body {
   margin-bottom: 0.4em;
 }
 
+/* Highlight border when input is focused */
 #register_form input:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
@@ -70,6 +74,7 @@ body {
   color: var(--text-muted);
 }
 
+/* Submit button */
 #register_form button {
   margin-top: 0.8em;
   padding: 0.8em;
@@ -88,10 +93,6 @@ body {
   background: var(--accent-dark);
 }
 
-#register_form p {
-  display: none;
-}
-
 #register_form a {
   color: var(--accent);
   text-decoration: none;
@@ -103,6 +104,7 @@ body {
   text-decoration: underline;
 }
 
+/* Feedback message shown on error or success */
 #message {
   font-size: 0.8rem;
   color: #dc2626;
@@ -111,6 +113,7 @@ body {
   min-height: 1.2em;
 }
 
+/* "Already have an account?" / "Don't have an account?" link area */
 #auth_link {
   font-size: 0.875rem;
   color: var(--text-muted);

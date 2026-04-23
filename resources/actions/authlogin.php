@@ -1,8 +1,13 @@
 <?php
+// Handle authentication for employee login
+
 require(__DIR__ . "/../config/firebase.php");
+
+// Function to handle Firebase sign-in
 function firebaseSignIn($email, $password)
 {
     try {
+        // Send sign-in request to Firebase
         $result = firebaseRequest('signInWithPassword', [
             'email' => $email,
             'password' => $password,
@@ -15,6 +20,7 @@ function firebaseSignIn($email, $password)
         ];
     }
 
+    // Map Firebase error codes to user-friendly messages
     if (isset($result['error'])) {
         $error_message = $result['error']['message'];
 
@@ -40,6 +46,7 @@ function firebaseSignIn($email, $password)
         ];
     }
 
+    // Sign-in successful
     return [
         'success' => true,
         'message' => "Login successful",

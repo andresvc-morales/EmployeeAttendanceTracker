@@ -1,9 +1,13 @@
 <?php
+// Handle user registration through Firebase Authentication
+
 require(__DIR__ . "/../config/firebase.php");
 
+// Function to handle Firebase sign-up
 function firebaseSignUp($email, $password)
 {
     try {
+        // Send sign-up request to Firebase
         $result = firebaseRequest('signUp', [
             'email' => $email,
             'password' => $password,
@@ -15,6 +19,8 @@ function firebaseSignUp($email, $password)
             'message' => "Error: " . $e->getMessage()
         ];
     }
+
+    // Map Firebase error codes to user-friendly messages
     if (isset($result['error'])) {
         $error_message = $result['error']['message'];
 
@@ -29,11 +35,14 @@ function firebaseSignUp($email, $password)
         } else {
             $message = "An unknown error occurred: " . $error_message;
         }
+
         return [
             'success' => false,
             'message' => $message
         ];
     }
+
+    // Sign-up successful
     return [
         'success' => true,
         'message' => "User registered successfully.",

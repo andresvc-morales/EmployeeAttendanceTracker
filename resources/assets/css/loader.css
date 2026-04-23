@@ -1,8 +1,10 @@
+/* Colors used by the animated loader */
 :root {
   --loader-primary: rgba(13, 148, 136, 0.85);
   --loader-secondary: rgba(211, 211, 211, 0.75);
 }
 
+/* Centered spinner container */
 .loader {
   position: absolute;
   top: calc(50% - 1.25em);
@@ -12,6 +14,7 @@
   transform: rotate(165deg);
 }
 
+/* Two pseudo-elements form the two orbiting dots */
 .loader:before,
 .loader:after {
   content: "";
@@ -33,6 +36,7 @@
   animation: after6 2s infinite;
 }
 
+/* Horizontal orbit animation */
 @keyframes before8 {
   0% {
     width: 0.5em;
@@ -62,6 +66,7 @@
   }
 }
 
+/* Vertical orbit animation */
 @keyframes after6 {
   0% {
     height: 0.5em;

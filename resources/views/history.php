@@ -1,15 +1,19 @@
 <?php
+// Attendance history page for authenticated employees to view their past attendance records.
 session_start();
-require_once '../config/database.php';
 
+// Redirect to login if not authenticated
 if (!isset($_SESSION['employee_id'])) {
     header("Location: /EmployeeAttendanceTracker/resources/views/login.php");
     exit();
 }
 
+require_once '../config/database.php';
+
 $employee_id = $_SESSION['employee_id'];
 $employee_name = $_SESSION['employee_name'] ?? 'Employee';
 
+// Fetch all attendance records for this employee, most recent first
 $stmt = $conn->prepare("SELECT date, entry_time, exit_time FROM assistance_records WHERE employee_id = ? ORDER BY date DESC");
 $stmt->bind_param("i", $employee_id);
 $stmt->execute();
@@ -28,9 +32,10 @@ $records = $result->fetch_all(MYSQLI_ASSOC);
 
 <body>
     <div id="history_container">
-        <h2>Attendance History - <?= htmlspecialchars($employee_name) ?></h2>
+        <h2>Attendance History — <?= htmlspecialchars($employee_name) ?></h2>
 
         <?php if (count($records) > 0): ?>
+            <!-- Attendance records table -->
             <table>
                 <thead>
                     <tr>

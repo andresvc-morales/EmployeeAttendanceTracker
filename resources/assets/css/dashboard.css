@@ -1,5 +1,7 @@
+/* Google Font import */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
 
+/* Global design tokens */
 :root {
   --accent-dark: #0f766e;
   --accent: #0d9488;
@@ -17,6 +19,7 @@ body {
   margin: 0;
 }
 
+/* Centered card layout */
 #dashboard_card {
   background: white;
   border-radius: var(--radius);
@@ -39,6 +42,7 @@ body {
   margin: 0 0 0.2em 0;
 }
 
+/* Date subtitle below the welcome heading */
 #dashboard_card .date {
   border-bottom: 1px solid var(--gray-light);
   color: var(--text-muted);
@@ -47,6 +51,7 @@ body {
   padding-bottom: 1em;
 }
 
+/* Row used for entry/exit time display */
 #dashboard_card .row {
   align-items: center;
   border-bottom: 1px solid var(--gray-light);
@@ -65,6 +70,7 @@ body {
   font-weight: 600;
 }
 
+/* Action button (Mark Entry / Mark Exit / Completed) */
 #dashboard_card button {
   background: var(--accent);
   border-radius: var(--radius);
@@ -79,6 +85,7 @@ body {
   transition: background 0.2s ease;
 }
 
+/* Disabled state once attendance is complete */
 #dashboard_card button:disabled {
   background: var(--gray-light);
   color: #9ca3af;
@@ -89,6 +96,7 @@ body {
   background: var(--accent-dark);
 }
 
+/* Navigation links */
 #dashboard_card a {
   color: var(--text-muted);
   font-size: 0.875rem;
@@ -103,6 +111,7 @@ body {
   text-decoration: underline;
 }
 
+/* Feedback message (success overrides red color inline) */
 #message {
   color: #dc2626;
   font-size: 0.8rem;
