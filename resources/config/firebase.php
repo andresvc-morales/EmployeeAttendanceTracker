@@ -1,6 +1,6 @@
 <?php
 // Firebase REST API key (add yours from the Firebase Console)
-define('FirebaseApiKey', 'AIzaSyA13I09OPMLm-tMH9zMQgUFH2abe_rfLM8');
+define('FirebaseApiKey', '');
 
 // Base URL for Firebase Authentication REST API
 define('FirebaseBaseURL', 'https://identitytoolkit.googleapis.com/v1/accounts:');
